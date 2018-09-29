@@ -678,3 +678,6 @@ body {
         border-radius: 10px;
     }
 }
+.has-error{
+    color:red;
+}

@@ -14,23 +14,26 @@
 
 Route::get('/', 'FrontController@index')->name('home');
 Route::get('/shirts', 'FrontController@shirts')->name('shirts');
-Route::get('/shirt', 'FrontController@shirt')->name('shirt');
+Route::get('/shirt/{id}', 'FrontController@shirt')->name('shirt');
 
 Auth::routes();
 Route::get('/logout','Auth\LoginController@logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('login');
 
 Route::group(['prefix' => 'admin','middleware'=>'auth'], function(){
     
-    Route::get('/', function(){
-        return view('admin.index');
-    })->name('admin.index');
+    Route::get('/', 'BackednController@index')->name('admin.index');
 
     Route::resource('product','ProductController')->names([
         'create' => 'admin.product.create',
-        'index' => 'admin.product'
+        'index' => 'admin.product',
+        'update' => 'admin.product.update',
+        'show' => 'admin.product.show',
+        'destroy' => 'admin.product.delete'
     ]);
-    Route::resource('category','CategoriesController');
+    Route::resource('category','CategoriesController')->names([
+        'index' => 'admin.categories',
+    ]);
 
 });

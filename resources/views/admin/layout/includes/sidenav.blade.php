@@ -16,6 +16,8 @@
                     <li><a href="{{route('admin.product')}}">Product</a></li>
                 </ul>
             </li>
+            <li class=""><a href="{{route('admin.categories')}}"><i class="glyphicon glyphicon-list"></i>Categories</a></li>
+
         </ul>
     </div>
 </div> <!-- ADMIN SIDE NAV-->

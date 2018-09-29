@@ -3,6 +3,7 @@
 @section('title','shirt')
 
 @section('content')
+
 <!-- products listing -->
         <!-- Latest SHirts -->
         <div class="row">
@@ -10,7 +11,7 @@
                 <div class="item-wrapper">
                     <div class="img-wrapper">
                         <a href="#">
-                             <img src="http://i.imgur.com/Mcw06Yt.png"/>
+                             <img src="{{url('images',$shirt->image)}}"/>
                         </a>
                     </div>
                 </div>
@@ -18,7 +19,7 @@
             <div class="small-6 columns">
                 <div class="item-wrapper">
                     <h3 class="subheader">
-                       <span class="price-tag">$20</span> Mc-Mykey Designed Shirt
+                       <span class="price-tag">Rs.{{$shirt->price}}</span> {{$shirt->name}}
                     </h3>
                     <div class="row">
                         <div class="large-12 columns">

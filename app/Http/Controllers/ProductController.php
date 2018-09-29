@@ -43,7 +43,9 @@ class ProductController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'size' => 'required',
+            'description' => 'required',
             'price' => 'required',
+            'category_id' => 'required',
             'image' => 'image|mimes:png,jpg,jpeg|max:1000'
         ]);
 
@@ -56,7 +58,7 @@ class ProductController extends Controller
         }
 
         Product::create($formInput);
-        return redirect()->route('admin.products');
+        return redirect()->route('admin.product');
     }
 
     /**
@@ -67,7 +69,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.product.product', compact('product'));
     }
 
     /**
@@ -78,7 +81,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::pluck('name','id');
+        $product = Product::find($id);
+        return view('admin.product.edit', compact('categories','product'));
     }
 
     /**
@@ -90,7 +95,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $formInput = $request->except('image');
+
+        $this->validate($request,[
+            'name' => 'required',
+            'size' => 'required',
+            'price' => 'required',
+            'image' => 'image|mimes:png,jpg,jpeg|max:1000'
+        ]);
+
+        $image = $request->image;
+        if($image)
+        {
+            $imageName = $image->getClientOriginalName();
+            $image->move('images', $imageName);
+            $formInput['image'] = $imageName;
+        }
+
+        $product = Product::find($id);
+        $product->update($request->all());
+
+        //Product::update($formInput, $id);
+        return redirect()->route('admin.product');
     }
 
     /**
@@ -101,6 +127,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::destroy($id);
+        return $this->view('admin.product.index');
     }
 }

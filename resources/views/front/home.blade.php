@@ -35,7 +35,7 @@
                                 <img src="{{url('images', $shirt->image)}}"/>
                             </a>
                         </div>
-                        <a href="#">
+                        <a href="{{route('shirt',$shirt->id)}}">
                             <h3>
                                 {{$shirt->name}}
                             </h3>

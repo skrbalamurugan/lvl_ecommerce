@@ -36,7 +36,13 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formInput = $request->all();
+        $this->validate($request,[
+            'name' => 'required'
+        ]);
+
+        Category::create($formInput);
+        return redirect()->route('admin.category');
     }
 
     /**
@@ -51,7 +57,7 @@ class CategoriesController extends Controller
         $products = Category::find($id)->products;
 
         $categories = Category::all();
-        return view('admin.category.index', compact('categories'));
+        return view('admin.category', compact('categories'));
     }
 
     /**

@@ -15,13 +15,13 @@
         </ul>
     </div>
 
-    <a class="btn btn-primary" data-toggle="model" href="#modelid">Add Category</a>
+    <a class="btn btn-primary" data-toggle="modal" href="#modelid">Add Category</a>
     <div class="modal face" id="modelid" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
-        {!! Form::open(['route'=>'product.store', 'method'=>'post', 'files'=>true]) !!}
+        {!! Form::open(['route'=>'category.store', 'method'=>'post', 'files'=>true]) !!}
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Add Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -34,7 +34,7 @@
                     </div>
                     
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    {{ Form::submit('store', array('class'=>'btn btn-primary'))}}
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
